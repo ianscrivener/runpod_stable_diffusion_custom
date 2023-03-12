@@ -53,13 +53,12 @@ ADD start.sh /start.sh
 RUN chmod a+x /start.sh
 
 # Download SD models
-WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
-RUN wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
+RUN wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
 
 # Download SD Lora models
-RUN mkdir /workspace/SD-Lora \
-    && wget https://civitai.com/api/download/models/8746 -O /workspace/SD-Lora/OpenJourneyLora.safetensors \
-    && wget https://civitai.com/api/download/models/21213 -O /workspace/SD-Lora/EdenSherLorA..safetensors
+RUN mkdir /workspace/stable-diffusion-webui/models/Lora \
+    && wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors \
+    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
 
 
@@ -85,7 +84,6 @@ RUN ln -s /workspace/stable-diffusion-webui/models/Stable-diffusion/ /workspace/
     && mkdir -p /workspace/stable-diffusion-webui/outputs \
     && ln -s /workspace/stable-diffusion-webui/outputs /workspace/SD-Images \
     && ln -s /workspace/stable-diffusion-webui/models/Lora /workspace/SD-Lora  
-
 
 
 WORKDIR /workspace
