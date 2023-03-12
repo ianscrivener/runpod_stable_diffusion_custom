@@ -81,8 +81,10 @@ RUN mkdir /workspace/SD-Lora \
 
 
 # make convenience directories
-RUN ln -s /workspace/stable-diffusion-webui/models/Stable-Diffusion /workspace/SD-Models \
-    && ln -s /workspace/stable-diffusion-webui/outputs /workspace/SD-Images
+RUN ln -s /workspace/stable-diffusion-webui/models/Stable-diffusion/ /workspace/SD-Models \
+    && mkdir -p /workspace/stable-diffusion-webui/outputs \
+    && ln -s /workspace/stable-diffusion-webui/outputs /workspace/SD-Images \
+    && ln -s /workspace/stable-diffusion-webui/models/Lora /workspace/SD-Lora  
 
 
 
