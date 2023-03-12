@@ -1,10 +1,5 @@
 # derived from Runpod containers https://github.com/runpod/containers.. thanks!
 
-    # FROM runpod/stable-diffusion-models:2.1 as build
-    # COPY --from=build /models/v2-1_768-ema-pruned.ckpt /workspace/v2-1_768-ema-pruned.ckpt
-    # COPY --from=build /models/v2-1_768-ema-pruned.yaml /workspace/v2-1_768-ema-pruned.yaml
-    # COPY --from=build /root/.cache/huggingface /root/.cache/huggingface
-
 FROM ubuntu:22.04 AS runtime
 
 RUN rm -rf /workspace && mkdir /workspace && mkdir -p /root/.cache/huggingface
@@ -51,34 +46,44 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 
 ADD ui-config.json /workspace/stable-diffusion-webui/ui-config.json
+ADD config.json /workspace/stable-diffusion-webui/config.json
 ADD relauncher.py .
 ADD webui-user.sh .
 ADD start.sh /start.sh
 RUN chmod a+x /start.sh
 
-# config sd models directory
-RUN mkdir /workspace/SD-CKPT && rm -rf /workspace/stable-diffusion-webui/models/Stable-diffusion/ && ln -s /workspace/SD-CKPT/ /workspace/stable-diffusion-webui/models/Stable-diffusion && ls /workspace/stable-diffusion-webui/models/Stable-diffusion/
-
-# config lora
-RUN mkdir /workspace/SD-Lora && rm -rf  /workspace/stable-diffusion-webui/models/Lora && ln -s /workspace/SD-Lora  /workspace/stable-diffusion-webui/models/Lora && ls /workspace/stable-diffusion-webui/models/Lora
+# Download SD models
+WORKDIR /workspace/stable-diffusion-webui/models/Stable-Diffusion \
+    && wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
 
 
-# Downlaod SD models
-WORKDIR /workspace/SD-CKPT
-RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors
-RUN wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
-RUN wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt
-RUN wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt
-RUN wget https://civitai.com/api/download/models/6514 -O GrapeLikeDreamFruit.safetensors
-RUN wget https://civitai.com/api/download/models/96 -O Openjourney.safetensors
-RUN wget https://civitai.com/api/download/models/2483 -O Portait_Plus_.safetensors
-RUN wget https://civitai.com/api/download/models/1344 -O Analog_Diffusion.safetensors
+# Download SD Lora models
+RUN mkdir /workspace/SD-Lora
+WORKDIR /workspace/SD-Lora \
+    && wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors
+    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
-# Downlaod SD Lora models
-WORKDIR /workspace/Lora
-RUN wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors
-RUN wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
-RUN wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors
+
+# make convenience directories
+RUN ln -s /workspace/stable-diffusion-webui/models/Stable-Diffusion /workspace/SD-Models \
+    && ln -s /workspace/stable-diffusion-webui/outputs /workspace/SD-Images
+
+
+# WORKDIR /workspace/SD-Lora \
+#     && wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
+#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt \
+#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
+#     && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
+#     && wget https://civitai.com/api/download/models/7257 -O S1dlxbrew_LoRA302.safetensors \
+#     && wget https://civitai.com/api/download/models/15862 -O momo.safetensors \
+#     && wget https://civitai.com/api/download/models/6514 -O GrapeLikeDreamFruit.safetensors \
+#     && wget https://civitai.com/api/download/models/96 -O Openjourney.safetensors \
+#     && wget https://civitai.com/api/download/models/2483 -O Portait_Plus_.safetensors \
+#     && wget https://civitai.com/api/download/models/1344 -O Analog_Diffusion.safetensors
+#     && wget https://civitai.com/api/download/models/12873 -O Innies.safetensors \
+#     && wget https://civitai.com/api/download/models/15563 -O ButtsAndBareFeet.safetensors \
+#     && wget https://civitai.com/api/download/models/10445 -O YvonneStrahovski.safetensors
+
 
 WORKDIR /workspace
 
