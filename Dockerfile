@@ -52,25 +52,26 @@ ADD webui-user.sh .
 ADD start.sh /start.sh
 RUN chmod a+x /start.sh
 
-# Download SD models
-WORKDIR /workspace/stable-diffusion-webui/models/Stable-Diffusion \
-    && wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
-
-
-# Download SD Lora models
-RUN mkdir /workspace/SD-Lora
-WORKDIR /workspace/SD-Lora \
-    && wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors \
-    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
-
-
 # make convenience directories
 RUN ln -s /workspace/stable-diffusion-webui/models/Stable-Diffusion /workspace/SD-Models \
     && ln -s /workspace/stable-diffusion-webui/outputs /workspace/SD-Images
 
+# Download SD models
+WORKDIR /workspace/stable-diffusion-webui/models/Stable-Diffusion
+RUN wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
 
-# WORKDIR /workspace/SD-Lora \
-#     && wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
+
+# Download SD Lora models
+RUN mkdir /workspace/SD-Lora
+WORKDIR /workspace/SD-Lora
+RUN wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors \
+    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
+
+
+
+
+# WORKDIR /workspace/SD-Lora
+# RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
 #     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt \
 #     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt \
 #     && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
