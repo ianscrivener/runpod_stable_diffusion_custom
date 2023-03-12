@@ -60,7 +60,7 @@ WORKDIR /workspace/stable-diffusion-webui/models/Stable-Diffusion \
 # Download SD Lora models
 RUN mkdir /workspace/SD-Lora
 WORKDIR /workspace/SD-Lora \
-    && wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors
+    && wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors \
     && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
 
@@ -72,7 +72,7 @@ RUN ln -s /workspace/stable-diffusion-webui/models/Stable-Diffusion /workspace/S
 # WORKDIR /workspace/SD-Lora \
 #     && wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
 #     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt \
-#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
+#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt \
 #     && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
 #     && wget https://civitai.com/api/download/models/7257 -O S1dlxbrew_LoRA302.safetensors \
 #     && wget https://civitai.com/api/download/models/15862 -O momo.safetensors \
