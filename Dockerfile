@@ -57,15 +57,15 @@ ADD start.sh /start.sh
 RUN chmod a+x /start.sh
 
 # config sd models directory
-# RUN mkdir /workspace/SD-CKPT && rm -rf /workspace/stable-diffusion-webui/models/Stable-diffusion/ && ln -s /workspace/SD-CKPT/ /workspace/stable-diffusion-webui/models/Stable-diffusion && ls /workspace/stable-diffusion-webui/models/Stable-diffusion/
+RUN mkdir /workspace/SD-CKPT && rm -rf /workspace/stable-diffusion-webui/models/Stable-diffusion/ && ln -s /workspace/SD-CKPT/ /workspace/stable-diffusion-webui/models/Stable-diffusion && ls /workspace/stable-diffusion-webui/models/Stable-diffusion/
 
 # config lora
-# RUN mkdir /workspace/SD-Lora && rm -rf  /workspace/stable-diffusion-webui/models/Lora && ln -s /workspace/SD-Lora  /workspace/stable-diffusion-webui/models/Lora && ls /workspace/stable-diffusion-webui/models/Lora
+RUN mkdir /workspace/SD-Lora && rm -rf  /workspace/stable-diffusion-webui/models/Lora && ln -s /workspace/SD-Lora  /workspace/stable-diffusion-webui/models/Lora && ls /workspace/stable-diffusion-webui/models/Lora
 
 
 # Downlaod SD models
-# WORKDIR /workspace/SD-CKPT
-# RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors
+WORKDIR /workspace/SD-CKPT
+RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors
 # RUN wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
 # RUN wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt
 # RUN wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt
@@ -75,8 +75,8 @@ RUN chmod a+x /start.sh
 # RUN wget https://civitai.com/api/download/models/1344 -O Analog_Diffusion.safetensors
 
 # Downlaod SD Lora models
-# WORKDIR /workspace/Lora
-# RUN wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors
+WORKDIR /workspace/Lora
+RUN wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors
 # RUN wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 # RUN wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors
 
