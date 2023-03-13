@@ -13,7 +13,7 @@ then
 
     if [[ $s3_access_key ]] && [[ $s3_secret_key ]]
     then
-        rm is_first_boot
+        mv is_first_boot is_subsequent_boot
 
         #1 get custom post_install_script & run it  
         if [[ $post_install_script ]]
@@ -44,7 +44,7 @@ then
         fi
     fi
 
-# on re boot
+# on reboot
 else    
 
     # run bash script after reboot
