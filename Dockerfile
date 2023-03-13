@@ -45,22 +45,24 @@ RUN python -m install --skip-torch-cuda-test
 RUN apt clean && rm -rf /var/lib/apt/lists/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 
+# Download SD Lora models
+RUN mkdir -p /workspace/stable-diffusion-webui/models/Lora/
+WORKDIR /workspace/stable-diffusion-webui/models/Lora
+RUN wget https://civitai.com/api/download/models/8746 -O /workspace/stable-diffusion-webui/models/Lora/OpenJourneyLora.safetensors \
+    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
-# # Download SD models
-# WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
-# RUN wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
 
-# # Download SD Lora models
-# WORKDIR /workspace/stable-diffusion-webui/models/Lora
-# RUN wget https://civitai.com/api/download/models/8746 -O /workspace/stable-diffusion-webui/models/LoraOpenJourneyLora.safetensors \
-#     && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
+# Download SD models
+WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
+RUN rm /workspace/stable-diffusion-webui/models/Stable-diffusion//*.txt \
+    && wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
+    && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
 
 
 
 # WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
 # RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
 #     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt \
-#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt \
 #     && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
 #     && wget https://civitai.com/api/download/models/7257 -O S1dlxbrew_LoRA302.safetensors \
 #     && wget https://civitai.com/api/download/models/15862 -O momo.safetensors \
@@ -81,7 +83,7 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* && \
 #     && ln -s /workspace/stable-diffusion-webui/models/Lora /workspace/SD-Lora  
 
 
-WORKDIR /workspace
+WORKDIR /workspace/stable-diffusion-webui
 
 ADD ui-config.json /workspace/stable-diffusion-webui/ui-config.json
 ADD config.json /workspace/stable-diffusion-webui/config.json
