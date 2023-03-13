@@ -187,5 +187,6 @@
     "control_net_skip_img2img_processing": false,
     "control_net_monocular_depth_optim": false,
     "control_net_only_mid_control": false,
-    "control_net_cfg_based_guidance": false
+    "control_net_cfg_based_guidance": false,
+    "additional_networks_extra_lora_path": "/workspace/SD-Lora"
 }
