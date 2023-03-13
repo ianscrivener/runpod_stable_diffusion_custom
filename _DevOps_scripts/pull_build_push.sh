@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ..
+cd /workspace
 git restore .
 git pull origin main
 docker image rm *
