@@ -47,15 +47,18 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* && \
 
 # Download SD Lora models
 RUN mkdir -p /workspace/stable-diffusion-webui/models/Lora/
+
 WORKDIR /workspace/stable-diffusion-webui/models/Lora
+
 RUN wget https://civitai.com/api/download/models/8746 -O /workspace/stable-diffusion-webui/models/Lora/OpenJourneyLora.safetensors \
     && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
 
 # Download SD models
 WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
-RUN rm /workspace/stable-diffusion-webui/models/Stable-diffusion//*.txt \
-    && wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
+
+RUN rm /workspace/stable-diffusion-webui/models/Stable-diffusion/*.txt \
+    && wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors \
     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
 
 
