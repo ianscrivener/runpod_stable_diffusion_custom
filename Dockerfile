@@ -46,14 +46,14 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 
 
-# Download SD models
-WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
-RUN wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
+# # Download SD models
+# WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
+# RUN wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
 
-# Download SD Lora models
-WORKDIR /workspace/stable-diffusion-webui/models/Lora
-RUN wget https://civitai.com/api/download/models/8746 -O /workspace/stable-diffusion-webui/models/LoraOpenJourneyLora.safetensors \
-    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
+# # Download SD Lora models
+# WORKDIR /workspace/stable-diffusion-webui/models/Lora
+# RUN wget https://civitai.com/api/download/models/8746 -O /workspace/stable-diffusion-webui/models/LoraOpenJourneyLora.safetensors \
+#     && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
 
 
@@ -89,6 +89,7 @@ ADD relauncher.py .
 ADD webui-user.sh .
 ADD start.sh /start.sh
 RUN chmod a+x /start.sh
+
 
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
