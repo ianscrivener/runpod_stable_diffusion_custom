@@ -59,13 +59,12 @@ WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
 
 RUN rm /workspace/stable-diffusion-webui/models/Stable-diffusion/*.txt \
     && wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors \
-    && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
-
+    && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4_Fantasy.ai/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
 
 
 # WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
 # RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
-#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4/resolve/main/Realistic_Vision_V1.4.ckpt \
+#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4_Fantasy.ai/resolve/main/Realistic_Vision_V1.4.ckpt \
 #     && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
 #     && wget https://civitai.com/api/download/models/7257 -O S1dlxbrew_LoRA302.safetensors \
 #     && wget https://civitai.com/api/download/models/15862 -O momo.safetensors \
