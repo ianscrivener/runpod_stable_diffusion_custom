@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /workspace
+cd /root/runpod_stable_diffusion_custom
 git restore .
 git pull origin main
 docker image rm *
