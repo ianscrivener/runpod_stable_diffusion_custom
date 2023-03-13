@@ -48,12 +48,12 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* && \
 
 # Download SD models
 WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
-RUN wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetensors
+RUN wget https://civitai.com/api/download/models/15236 -O /workspace/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
 
 # Download SD Lora models
-# WORKDIR /workspace/stable-diffusion-webui/models/Lora
-# RUN wget https://civitai.com/api/download/models/8746 -O OpenJourneyLora.safetensors \
-#     && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
+WORKDIR /workspace/stable-diffusion-webui/models/Lora
+RUN wget https://civitai.com/api/download/models/8746 -O /workspace/stable-diffusion-webui/models/LoraOpenJourneyLora.safetensors \
+    && wget https://civitai.com/api/download/models/21213 -O EdenSherLorA..safetensors
 
 
 
@@ -81,14 +81,14 @@ RUN wget https://civitai.com/api/download/models/15236 -O Deliberate_v2.safetens
 #     && ln -s /workspace/stable-diffusion-webui/models/Lora /workspace/SD-Lora  
 
 
-# WORKDIR /workspace
+WORKDIR /workspace
 
-# ADD ui-config.json /workspace/stable-diffusion-webui/ui-config.json
-# ADD config.json /workspace/stable-diffusion-webui/config.json
-# ADD relauncher.py .
-# ADD webui-user.sh .
-# ADD start.sh /start.sh
-# RUN chmod a+x /start.sh
+ADD ui-config.json /workspace/stable-diffusion-webui/ui-config.json
+ADD config.json /workspace/stable-diffusion-webui/config.json
+ADD relauncher.py .
+ADD webui-user.sh .
+ADD start.sh /start.sh
+RUN chmod a+x /start.sh
 
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
