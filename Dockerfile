@@ -63,7 +63,7 @@ RUN rm /workspace/stable-diffusion-webui/models/Stable-diffusion/*.txt \
 
 
 RUN wget https://huggingface.co/SG161222/Realistic_Vision_V1.4_Fantasy.ai/resolve/main/Realistic_Vision_V1.4.ckpt \
-    && wget https://civitai.com/api/download/models/6987  -O Realistic_Vision_V1.3.safetensors \
+    && wget https://civitai.com/api/download/models/6987 -O Realistic_Vision_V1.3.safetensors \
     && wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
     && wget https://civitai.com/api/download/models/6514 -O GrapeLikeDreamFruit.safetensors
 
@@ -76,11 +76,11 @@ RUN ln -s /workspace/stable-diffusion-webui/models/Stable-diffusion/ /workspace/
 
 WORKDIR /workspace/stable-diffusion-webui/models/Lora
 
-RUN wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
-    && wget https://civitai.com/api/download/models/15563 -O ButtsAndBareFeet.safetensors \
-    && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
-    && wget https://civitai.com/api/download/models/7257 -O S1dlxbrew_LoRA302.safetensors \
-    && wget https://civitai.com/api/download/models/10445 -O YvonneStrahovski.safetensors
+# RUN wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
+#     && wget https://civitai.com/api/download/models/15563 -O ButtsAndBareFeet.safetensors \
+#     && wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.safetensors \
+#     && wget https://civitai.com/api/download/models/7257 -O S1dlxbrew_LoRA302.safetensors \
+#     && wget https://civitai.com/api/download/models/10445 -O YvonneStrahovski.safetensors
 
 
 # WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
@@ -93,6 +93,18 @@ RUN wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.s
 
 
 WORKDIR /workspace/stable-diffusion-webui
+
+
+# install Resilio Sync
+# RUN echo "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free" | tee /etc/apt/sources.list.d/resilio-sync.list \
+#     && wget -qO- https://linux-packages.resilio.com/resilio-sync/key.asc | tee /etc/apt/trusted.gpg.d/resilio-sync.asc \
+#     && apt update \
+#     && apt-get install resilio-sync \
+#     && systemctl enable resilio-sync \
+#     && loginctl enable-linger root \
+#     && apt clean && rm -rf /var/lib/apt/lists/*
+
+
 
 ADD ui-config.json /workspace/stable-diffusion-webui/ui-config.json
 ADD config.json /workspace/stable-diffusion-webui/config.json
