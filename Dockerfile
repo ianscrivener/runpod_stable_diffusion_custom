@@ -62,8 +62,12 @@ RUN rm /workspace/stable-diffusion-webui/models/Stable-diffusion/*.txt \
     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4_Fantasy.ai/resolve/main/Realistic_Vision_V1.4-inpainting.ckpt 
 
 
+RUN wget https://huggingface.co/SG161222/Realistic_Vision_V1.4_Fantasy.ai/resolve/main/Realistic_Vision_V1.4.ckpt \
+    && wget https://civitai.com/api/download/models/6987  -O Realistic_Vision_V1.3.safetensors \
+    && wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
+    && wget https://civitai.com/api/download/models/6514 -O GrapeLikeDreamFruit.safetensors
 
-make convenience directories
+# make convenience directories
 RUN ln -s /workspace/stable-diffusion-webui/models/Stable-diffusion/ /workspace/SD-Models \
     && mkdir -p /workspace/stable-diffusion-webui/outputs \
     && ln -s /workspace/stable-diffusion-webui/outputs/ /workspace/SD-Images \
@@ -80,9 +84,7 @@ RUN wget https://civitai.com/api/download/models/21126 -O BreastHelperBetaLora.s
 
 
 # WORKDIR /workspace/stable-diffusion-webui/models/Stable-diffusion
-# RUN wget https://civitai.com/api/download/models/9901 -O refined-WRAP8.safetensors \
-#     && wget https://huggingface.co/SG161222/Realistic_Vision_V1.4_Fantasy.ai/resolve/main/Realistic_Vision_V1.4.ckpt \
-#     && wget https://civitai.com/api/download/models/15862 -O momo.safetensors \
+# RUN wget https://civitai.com/api/download/models/15862 -O momo.safetensors \
 #     && wget https://civitai.com/api/download/models/6514 -O GrapeLikeDreamFruit.safetensors \
 #     && wget https://civitai.com/api/download/models/96 -O Openjourney.safetensors \
 #     && wget https://civitai.com/api/download/models/2483 -O Portait_Plus_.safetensors \
